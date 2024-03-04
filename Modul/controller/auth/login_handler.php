@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../Koneksi/db_connection.php';
+require_once '../../../koneksi/db_connection.php';
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -23,5 +23,5 @@ $_SESSION['loggedin'] = true;
 $_SESSION['userid'] = $user['id'];
 $_SESSION['name'] = $user['name'];
 
-header('Location: ../../Modul/View/home/index.php');
+header('Location: ../../../modul/view/home/index.php');
 exit;

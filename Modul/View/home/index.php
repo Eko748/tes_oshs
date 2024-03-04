@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['userid'])) {
+    header("Location: ../auth/login.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +13,9 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="../../../Assets/css/bootstrap.css">
+    <link rel="icon" href="../../../assets/img/TEST_oshs.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="../../../assets/img/TEST_oshs.jpg" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/bootstrap.css">
 </head>
 
 <body class="bg-light">
@@ -25,11 +32,8 @@ session_start();
                     <li class="nav-item">
                         <a class="nav-link" href="../product/index.php">Product</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
                 </ul>
-                <a href="../../Controller/logout_handler.php" class="btn btn-primary float-end">Logout</a>
+                <button onclick="confirmLogout()" class="btn btn-primary float-end">Logout</button>
             </div>
         </div>
     </nav>
@@ -45,15 +49,23 @@ session_start();
         </div>
 
         <div class="card">
-            <div class="card-body">
+            <div class="card-body mb-3">
                 <div class="col-md-12 text-center">
                     <h1 class="mb-4">Welcome, <?php echo $_SESSION['name']; ?>!</h1>
+                    <a href="../product/index.php" class="btn btn-sm btn-primary">Go to Product Table</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="../../../Assets/js/bootstrap.js"></script>
+    <script src="../../../assets/js/bootstrap.js"></script>
+    <script>
+        function confirmLogout() {
+            if (confirm("Are you sure you want to logout?")) {
+                window.location.href = "../../controller/auth/logout_handler.php";
+            }
+        }
+    </script>
 </body>
 
 </html>
